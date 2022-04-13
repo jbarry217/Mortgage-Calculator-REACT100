@@ -27,7 +27,7 @@ describe('Mortgage Calculator', function () {
       pageObject = nightmare().goto(url);
     });
 
-    it('should have the correct page title', () =>
+    it('should have an <h3> header element with the name "Mortgage Calculator"', () =>
       pageObject
         .evaluate(() => document.querySelector('body').innerText)
         .then((text) => {
