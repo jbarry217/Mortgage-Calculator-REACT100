@@ -4,10 +4,10 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      balance: 0,
-      rate: 0,
-      term: 0, 
-      result: 0
+      balance: "",
+      rate: "",
+      term: "", 
+      output: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.calculateMortgage = this.calculateMortgage.bind(this);
@@ -23,29 +23,45 @@ export default class App extends React.Component {
       var n = this.state.term * 12;
       var pow = Math.pow((1 + r), n)
        let result = (B * (r * pow) / (pow - 1)).toFixed(2);
-    this.setState({result:result})
+    this.setState({output: `$${result} is your monthly payment.`})
     }
 
   render() {
     return (
-
-      <div className='container'>
+      <div style={{ 
+        backgroundImage: "url(/townhouse.jpg)", 
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover", 
+        height: "100vh",
+        width: "100vw"
+        }}>
+      <div className='container' id="container">
       <h3>Mortgage Calculator</h3>
-        <input name="balance" type="number" defaultValue={this.state.balance} onChange= {this.handleChange} />
-        <input name="rate" type="number" step="0.01" defaultValue={this.state.rate} onChange= {this.handleChange} />
-        <select name="term" defaultValue={this.state.term} onChange= {this.handleChange}>
-        <option value="">--Please choose a term--</option>
-          <option value="15">15</option>
-          <option value="30">30</option>
-        </select>
+      <div id="inputs">
+        <label for="balance">Loan Balance </label>
+          <input name="balance" type="number" id="balance" defaultValue={this.state.balance} onChange= {this.handleChange} />
+      <br/>
+        <label for="rate">Interest Rate (%) </label>
+          <input name="rate" type="number" id="rate" step="0.01" defaultValue={this.state.rate} onChange= {this.handleChange} />
+      <br/>
+        <label for="term">Loan Term (years)</label>
+          <select name="term" id="termYear" defaultValue={this.state.term} onChange= {this.handleChange}>
+          <option value="">Choose a term</option>
+            <option value="15">15</option>
+            <option value="30">30</option>
+          </select>
+          </div>
+      <br/>
         <button 
           name="submit" 
           id="submit" 
           onClick= {() => this.calculateMortgage()}>
-          Calculate
+           Calculate 
         </button>
-        <div id="output" name="output">{`$${this.state.result} is your payment.`}</div>
-
+        <br/>
+        <div id="output" name="output" onClick={this.calculateMortgage}>{this.state.output}</div>
+      
+      </div>
       </div>
     );
   }
