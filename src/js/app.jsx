@@ -1,4 +1,5 @@
 import React from 'react';
+import Inputs from './Components/Inputs';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -37,27 +38,13 @@ export default class App extends React.Component {
         }}>
       <div className='container' id="container">
       <h3>Mortgage Calculator</h3>
-      <div id="inputs">
-        <label for="balance">Loan Balance </label>
-          <input name="balance" type="number" id="balance" defaultValue={this.state.balance} onChange= {this.handleChange} />
-      <br/>
-        <label for="rate">Interest Rate (%) </label>
-          <input name="rate" type="number" id="rate" step="0.01" defaultValue={this.state.rate} onChange= {this.handleChange} />
-      <br/>
-        <label for="term">Loan Term (years)</label>
-          <select name="term" id="termYear" defaultValue={this.state.term} onChange= {this.handleChange}>
-          <option value="">Choose a term</option>
-            <option value="15">15</option>
-            <option value="30">30</option>
-          </select>
-          </div>
-      <br/>
-        <button 
-          name="submit" 
-          id="submit" 
-          onClick= {() => this.calculateMortgage()}>
-           Calculate 
-        </button>
+        <Inputs balance={this.state.balance} rate={this.state.rate} term={this.state.term} handleChange= {this.handleChange}/>
+          <button 
+            name="submit" 
+            id="submit" 
+            onClick= {() => this.calculateMortgage()}>
+            Calculate 
+                </button>
         <br/>
         <div id="output" name="output" onClick={this.calculateMortgage}>{this.state.output}</div>
       
