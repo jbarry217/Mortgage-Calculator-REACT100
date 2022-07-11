@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  context: path.join(__dirname, '/src'),
+  context: path.join(__dirname, 'public/src'),
 
   entry: {
     javascript: './js/index'
